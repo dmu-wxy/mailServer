@@ -104,7 +104,7 @@
             <br style="box-sizing: border-box;"/>
         </p>
         <p style=" margin: 0px; padding: 0px; box-sizing: border-box;">
-            <a href="https://www.adskn.com/login/mail.html?mod=${mod(reg/changeMail}&etoken=${etoken}&email=${email}" _src="https://www.adskn.com/login/mail.html?mod=${mod(reg/changeMail}&etoken=${etoken}&email=${email}" style="box-sizing: border-box;">https://www.adskn.com/login/mail.html?mod=${mod(reg/changeMail)}&amp;etoken=${etoken}&amp;email=${email}</a>
+            <a th:text="${url}" th:href="${url}"  _src="https://www.adskn.com/login/mail.html?mod=${mod}&etoken=${etoken}&email=${email}" style="box-sizing: border-box;"></a>
         </p>
         <p style=" margin: 0px; padding: 0px; box-sizing: border-box;">
             <br style="box-sizing: border-box;"/>

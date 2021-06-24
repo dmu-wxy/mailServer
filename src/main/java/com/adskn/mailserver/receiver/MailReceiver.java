@@ -30,7 +30,7 @@ public class MailReceiver {
 
     @RabbitListener(queues = "adskn.mail.ensure")
     public void handler(Map<String,String> map){
-        logger.info("消息队列》》》》");
+        logger.info("消息队列》》》》to:" + map.get("email"));
         String to = map.get("email");
         if(to == null || to.equals("")){
             // 没有邮箱不发送
@@ -42,10 +42,15 @@ public class MailReceiver {
             helper.setFrom(mailProperties.getUsername());
             helper.setSubject("adskn确认注册邮件");
             helper.setSentDate(new Date());
+            StringBuilder url = new StringBuilder("https://www.adskn.com/login/mail.html?mod=");
+            //${mod}&etoken=${etoken}&email=${email}";
+            url.append(map.get("mod"))
+                    .append("&etoken=")
+                    .append(map.get("etoken"))
+                    .append("&email=")
+                    .append(map.get("email"));
             Context context = new Context();
-            context.setVariable("mod",map.get("mod"));
-            context.setVariable("etoken",map.get("token"));
-            context.setVariable("email",map.get("email"));
+            context.setVariable("url",url.toString());
             String mail = templateEngine.process("mail",context);
             helper.setText(mail,true);
             helper.setTo(to);
